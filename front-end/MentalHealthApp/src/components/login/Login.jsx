@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from 'react-router-dom'
 
 import brain from "../../assets/brain.png"
+import wave from "../../assets/wave.png"
 
 import styles from './Login.module.css'
 
@@ -24,6 +25,12 @@ export const Login = () => {
       <img className={styles.brain}
         src={brain}
         alt="cerebro" />
+
+        
+      <div className={styles.wave1}/>
+      <div className={styles.wave2}/>
+      <div className={styles.wave3}/>
+
       <div className={styles.card}>
         <h1>Iniciar Sesion</h1>
         <form className={styles.form}
