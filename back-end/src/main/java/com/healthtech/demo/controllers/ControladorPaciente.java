@@ -1,0 +1,76 @@
+package com.healthtech.demo.controllers;
+
+import com.healthtech.demo.dto.*;
+import com.healthtech.demo.entities.Paciente;
+import com.healthtech.demo.services.PacienteService;
+import jakarta.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/paciente")
+public class ControladorPaciente {
+
+    //Se usa Autowired solo durante la prueba
+    @Autowired
+    PacienteService pacienteService;
+    
+    @Transactional
+    @PostMapping("/crear")
+    public ResponseEntity<CrearPacienteDTO> crearPaciente(@RequestBody @Valid CrearPacienteDTO paciente) {
+        pacienteService.savePaciente(paciente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(paciente);
+    }
+
+    @Transactional
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity eliminarPaciente(@PathVariable Long id) {
+        pacienteService.deletePaciente(id);
+        return ResponseEntity.ok("El usuario fue eliminado exitosamente");
+    }
+
+    @GetMapping("/listarPacientes")
+    public ResponseEntity<List<ListarPacienteDTO>> listarPacientes() {
+        List<Paciente> pacientes = pacienteService.getPacientes();
+        List<ListarPacienteDTO> pacientesDTO = pacientes.stream()
+                .map(paciente -> new ListarPacienteDTO(
+                paciente.getId(),
+                paciente.getNombre(),
+                paciente.getApellido(),
+                paciente.getEmail(),
+                paciente.getTelefono(),
+                paciente.getDocumento())).collect(Collectors.toList());
+        return ResponseEntity.ok(pacientesDTO);
+    }
+
+    @GetMapping("/seleccionar/{id}")
+    public ResponseEntity<ListarPacienteDTO> seleccionarPaciente(@PathVariable Long id) {
+        Paciente pacienteElegido = pacienteService.elegirPaciente(id);
+        ListarPacienteDTO pacienteDTO = new ListarPacienteDTO(
+                pacienteElegido.getId(),
+                pacienteElegido.getNombre(),
+                pacienteElegido.getApellido(),
+                pacienteElegido.getEmail(),
+                pacienteElegido.getTelefono(),
+                pacienteElegido.getDocumento());
+        return ResponseEntity.ok(pacienteDTO);
+    }
+
+    @Transactional
+    @PutMapping("/modificar")
+    public ResponseEntity<ActualizarPacienteDTO> actualizarPaciente(@RequestBody @Valid ActualizarPacienteDTO paciente) {
+        Paciente pacienteModificado = pacienteService.modificarPaciente(paciente);
+        ActualizarPacienteDTO pacienteDTO = new ActualizarPacienteDTO(
+                pacienteModificado.getId(),
+                pacienteModificado.getNombre(),
+                pacienteModificado.getApellido(),
+                pacienteModificado.getEmail(),
+                pacienteModificado.getTelefono());
+        return ResponseEntity.ok(pacienteDTO);
+    }
+}
