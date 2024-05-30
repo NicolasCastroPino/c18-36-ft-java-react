@@ -1,17 +1,14 @@
 package com.healthtech.demo.services;
 
+import com.healthtech.demo.dto.CrearPsicologoDTO;
 import com.healthtech.demo.entities.Psicologo;
 
 import java.util.List;
 
 public interface IPsicologoService {
+    List<Psicologo> getPsicologos();
 
-    //metodo para traer todos los psicologos
-    public List<Psicologo> getPsicologos();
+    Psicologo savePsicologo(CrearPsicologoDTO psicologo);
 
-    //metodo para dar de alta un psicologo
-    public void savePsicologo(Psicologo psicologo);
-
-    //metodo para dar de baja un psicologo
-    public void deletePsicolo(Long id);
+    void deletePsicologo(Long id);
 }

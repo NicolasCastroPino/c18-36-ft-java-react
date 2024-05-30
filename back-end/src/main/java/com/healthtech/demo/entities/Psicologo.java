@@ -1,5 +1,6 @@
 package com.healthtech.demo.entities;
 
+import com.healthtech.demo.dto.CrearPsicologoDTO;
 import com.healthtech.demo.enums.Especialidad;
 import jakarta.persistence.*;
 import java.util.List;
@@ -43,4 +44,14 @@ public class Psicologo {
 
     @OneToOne(mappedBy = "psicologo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Consulta consulta; // Relación uno a uno con Consulta
+
+    public Psicologo(CrearPsicologoDTO psicologo) {
+        this.nombre = psicologo.nombre();
+        this.apellido = psicologo.apellido();
+        this.email = psicologo.email();
+        this.telefono = psicologo.telefono();
+        this.documento = psicologo.documento();
+        this.activo = true;
+        this.usuario = new Usuario(psicologo.usuario());
+    }
 }

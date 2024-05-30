@@ -13,8 +13,6 @@ n
 >src/main/java/com/healthtech/demo/services/UsuarioService.java,8\c\8c77f860f4f8fe3f03dabac3537814cee99e999a
 p
 @src/main/java/com/healthtech/demo/services/IPacienteService.java,f\9\f9673b1a9e73426beb03c02a30ea269d52620660
-p
-@src/main/java/com/healthtech/demo/services/PsicologoService.java,3\f\3f2d8151e684e7cc23086ccaca8b2f30d3505ec6
 o
 ?src/main/java/com/healthtech/demo/services/IUsuarioService.java,c\0\c0d52035007d98d078d34f27b92e2f602974cdce
 v
@@ -39,3 +37,5 @@ v
 Fsrc/main/java/com/healthtech/demo/controllers/ControladorPaciente.java,7\6\767ae6634324f5d7d524488675448a3de5851544
 w
 Gsrc/main/java/com/healthtech/demo/controllers/ControladorPsicologo.java,c\d\cdd1540b4fec3f6cfa05e5911e2ba545da16f4cd
+p
+@src/main/java/com/healthtech/demo/services/PsicologoService.java,3\f\3f2d8151e684e7cc23086ccaca8b2f30d3505ec6
