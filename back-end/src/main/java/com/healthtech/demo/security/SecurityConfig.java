@@ -1,0 +1,71 @@
+package com.healthtech.demo.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Autowired
+    private AutenticationService autenticationService;
+
+    @Autowired
+    private SecurityFilter securityFilter;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                //.csrf(csrf->csrf.disable())
+                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(http -> {
+                    // EndPoints públicos
+                    http.requestMatchers(HttpMethod.GET, "/csrf-token").permitAll();
+                    http.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
+                    http.requestMatchers(HttpMethod.POST, "/auth/sign-up").permitAll();
+                    // EndPoints privados
+                    http.requestMatchers(HttpMethod.GET, "/paciente/listarPacientes").authenticated();
+                    http.requestMatchers(HttpMethod.GET, "/paciente/seleccionar/{id}").authenticated();
+                    http.requestMatchers(HttpMethod.DELETE, "/paciente/eliminar/{id}").authenticated();
+                    http.requestMatchers(HttpMethod.PUT, "/paciente/modificar").authenticated();
+                    // Permitir solicitudes OPTIONS para CORS
+                    http.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+                    http.anyRequest().denyAll();
+                })
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
+        
+        return httpSecurity.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(autenticationService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}

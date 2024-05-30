@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PsicologoRepository extends JpaRepository<Psicologo, Long> {
-    boolean exitsByDocumento(String titulo);
 }

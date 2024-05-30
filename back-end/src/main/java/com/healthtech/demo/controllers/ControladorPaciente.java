@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +17,7 @@ public class ControladorPaciente {
 
     //Se usa Autowired solo durante la prueba
     @Autowired
-    PacienteService pacienteService;
-    
-    @Transactional
-    @PostMapping("/crear")
-    public ResponseEntity<CrearPacienteDTO> crearPaciente(@RequestBody @Valid CrearPacienteDTO paciente) {
-        pacienteService.savePaciente(paciente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(paciente);
-    }
+    private PacienteService pacienteService;
 
     @Transactional
     @DeleteMapping("/eliminar/{id}")
@@ -45,6 +37,7 @@ public class ControladorPaciente {
                 paciente.getEmail(),
                 paciente.getTelefono(),
                 paciente.getDocumento())).collect(Collectors.toList());
+        
         return ResponseEntity.ok(pacientesDTO);
     }
 
