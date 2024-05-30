@@ -25,8 +25,8 @@ export const Login = () => {
       <img className={styles.brain}
         src={brain}
         alt="cerebro" />
-
         
+       {/* WAVES */}
       <div className={styles.wave1}/>
       <div className={styles.wave2}/>
       <div className={styles.wave3}/>
