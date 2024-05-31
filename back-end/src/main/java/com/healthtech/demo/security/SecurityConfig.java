@@ -42,6 +42,9 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.GET, "/paciente/seleccionar/{id}").authenticated();
                     http.requestMatchers(HttpMethod.DELETE, "/paciente/eliminar/{id}").authenticated();
                     http.requestMatchers(HttpMethod.PUT, "/paciente/modificar").authenticated();
+                    http.requestMatchers(HttpMethod.PUT, "/consulta").authenticated();
+                    // Swagger-ui
+                    http.requestMatchers("/swagger-ui.html", "/v3/api-docs/**","/swagger-ui/**").permitAll(); //Necesario para Swagger UI
                     // Permitir solicitudes OPTIONS para CORS
                     http.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     http.anyRequest().denyAll();
