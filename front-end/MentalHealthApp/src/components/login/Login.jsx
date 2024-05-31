@@ -1,23 +1,66 @@
-import { useState } from "react"
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react"
+import { Link, Navigate } from 'react-router-dom'
 
 import brain from "../../assets/brain.png"
-import wave from "../../assets/wave.png"
 
 import styles from './Login.module.css'
 
 export const Login = () => {
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState({
+    username: '',
+    password: ''
+  });
+  const [csrfToken, setcsrfToken] = useState('')
+
+  useEffect(()=>{
+    const fetchToken = async () => {
+      try{
+        const res = await fetch('http://localhost:8080/csrf-token',{
+          method: 'GET',
+          credentials: 'include'
+        })
+        const data = await res.json();
+        setcsrfToken(data.token)
+        console.log('CSRFToken: ', data.token);
+      }
+      catch (error){
+        console.error('Error al obtener el token CSRF');
+      }
+    }
+    fetchToken()
+  }, [])
+
 
   const catchInputs = (e) => {
     const { name, value } = e.target;
-    const newValues = ({ ...user, [name]: value });
-    setUser(newValues)
+    const newUser = ({...user, [name]:value})
+    setUser(newUser)
   }
 
-  const logIn = (e) => {
+  const logIn = async (e) => {
     e.preventDefault();
-    console.log(user)
+    const userDTO = {
+      usuario: user.username,
+      contrasenia: user.password
+    }
+    try{
+      const res = await fetch ('http://localhost:8080/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'aplication/json',
+        'X-XSRF-TOKEN': csrfToken
+      },
+      credentials: 'include',
+      body: JSON.stringify(userDTO)
+      });
+      const data = await res.json();
+      const token = data.token;
+      localStorage.setItem('jwt: ', token);
+      Navigate('/dashboard')
+    }
+    catch (error){
+      console.error('Hubo un error al iniciar sesion: ', error);
+    }
   }
 
   return (
