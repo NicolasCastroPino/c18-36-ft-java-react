@@ -12,10 +12,10 @@ export const Login = () => {
   });
   const [csrfToken, setcsrfToken] = useState('')
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchToken = async () => {
-      try{
-        const res = await fetch('http://localhost:8080/csrf-token',{
+      try {
+        const res = await fetch('http://localhost:8080/csrf-token', {
           method: 'GET',
           credentials: 'include'
         })
@@ -23,17 +23,16 @@ export const Login = () => {
         setcsrfToken(data.token)
         console.log('CSRFToken: ', data.token);
       }
-      catch (error){
+      catch (error) {
         console.error('Error al obtener el token CSRF');
       }
     }
     fetchToken()
   }, [])
 
-
   const catchInputs = (e) => {
     const { name, value } = e.target;
-    const newUser = ({...user, [name]:value})
+    const newUser = ({ ...user, [name]: value })
     setUser(newUser)
   }
 
@@ -43,22 +42,25 @@ export const Login = () => {
       usuario: user.username,
       contrasenia: user.password
     }
-    try{
-      const res = await fetch ('http://localhost:8080/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'aplication/json',
-        'X-XSRF-TOKEN': csrfToken
-      },
-      credentials: 'include',
-      body: JSON.stringify(userDTO)
+
+    try {
+      const res = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'aplication/json',
+          'X-XSRF-TOKEN': csrfToken
+        },
+        credentials: 'include',
+        body: JSON.stringify(userDTO)
       });
+
       const data = await res.json();
       const token = data.token;
       localStorage.setItem('jwt: ', token);
       Navigate('/dashboard')
     }
-    catch (error){
+
+    catch (error) {
       console.error('Hubo un error al iniciar sesion: ', error);
     }
   }
@@ -68,11 +70,11 @@ export const Login = () => {
       <img className={styles.brain}
         src={brain}
         alt="cerebro" />
-        
-       {/* WAVES */}
-      <div className={styles.wave1}/>
-      <div className={styles.wave2}/>
-      <div className={styles.wave3}/>
+
+      {/* WAVES */}
+      <div className={styles.wave1} />
+      <div className={styles.wave2} />
+      <div className={styles.wave3} />
 
       <div className={styles.card}>
         <h1>Iniciar Sesion</h1>

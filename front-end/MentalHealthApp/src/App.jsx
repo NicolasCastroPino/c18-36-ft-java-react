@@ -1,6 +1,6 @@
 import { Home } from "./components/Home"
 import { Login } from "./components/login/Login"
-import {Dashboard} from "./components/dashboard/Dashboard"
+import { Dashboard } from "./components/dashboard/Dashboard"
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
