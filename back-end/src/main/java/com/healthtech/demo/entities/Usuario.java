@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Data
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario implements UserDetails{

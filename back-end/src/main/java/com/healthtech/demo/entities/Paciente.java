@@ -34,7 +34,10 @@ public class Paciente {
     @ManyToMany(mappedBy = "pacientes", fetch = FetchType.EAGER)
     private List<Psicologo> psicologos;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+    private List<Emocion> emociones;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
