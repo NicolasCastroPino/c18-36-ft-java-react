@@ -23,7 +23,7 @@ public class Usuario implements UserDetails{
     
     private String contrasenia;
 
-    Usuario(UsuarioDTO usuarioDTO) {
+    public Usuario(UsuarioDTO usuarioDTO) {
         this.usuario = usuarioDTO.usuario();
         this.contrasenia = usuarioDTO.contrasenia();
     }

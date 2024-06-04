@@ -1,12 +1,11 @@
 package com.healthtech.demo.services;
 
 import com.healthtech.demo.dto.CrearConsultaDTO;
-import com.healthtech.demo.dto.DetallesConsultaDTO;
-import com.healthtech.demo.entities.Psicologo;
-import org.springframework.http.ResponseEntity;
+import com.healthtech.demo.entities.Consulta;
+import java.util.List;
 
 public interface IConsultaService {
-    public ResponseEntity<DetallesConsultaDTO> Agendar(CrearConsultaDTO datos);
+    public Consulta Agendar(CrearConsultaDTO datos);
     
-//    public Psicologo seleccionarPsicologo(CrearConsultaDTO datos);
+    public List<Consulta> getConsultas();
 }

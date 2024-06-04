@@ -1,6 +1,5 @@
 package com.healthtech.demo.entities;
 
-import com.healthtech.demo.enums.Especialidad;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.*;

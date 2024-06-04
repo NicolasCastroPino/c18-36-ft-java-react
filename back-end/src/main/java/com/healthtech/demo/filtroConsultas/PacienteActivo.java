@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PacienteActivo {
+public class PacienteActivo implements FiltroDeConsultas{
 
     @Autowired
-    private PacienteRepository repository;
+    private PacienteRepository pacienteRepository;
 
-    public void validar(CrearConsultaDTO datos) {
+    public void filtrarConsulta(CrearConsultaDTO datos) {
         if (datos.idPaciente() == null) {
             return;
         }
-        var pacienteActivo = repository.findActivoById(datos.idPaciente());
+        var pacienteActivo = pacienteRepository.findActivoById(datos.idPaciente());
 
         if (!pacienteActivo) {
             throw new ValidationException("No se puede permitir agendar citas con pacientes inactivos en el sistema");

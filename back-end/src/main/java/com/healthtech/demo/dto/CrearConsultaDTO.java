@@ -2,6 +2,7 @@ package com.healthtech.demo.dto;
 
 import com.healthtech.demo.enums.Especialidad;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -16,6 +17,7 @@ public record CrearConsultaDTO(
         Long idPsicologo,
         @NotNull
         Long idPaciente,
+        @Future
         @NotNull
         LocalDateTime fecha){
 }

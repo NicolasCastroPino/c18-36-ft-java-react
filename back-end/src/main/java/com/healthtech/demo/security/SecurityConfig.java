@@ -29,28 +29,34 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                //.csrf(csrf->csrf.disable())
-                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                .csrf(csrf->csrf.disable())
+                //.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
                     // EndPoints públicos
                     http.requestMatchers(HttpMethod.GET, "/csrf-token").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/auth/sign-up").permitAll();
-                    // EndPoints privados
+                    // EndPoints privados Pacientes
                     http.requestMatchers(HttpMethod.GET, "/paciente/listarPacientes").authenticated();
                     http.requestMatchers(HttpMethod.GET, "/paciente/seleccionar/{id}").authenticated();
                     http.requestMatchers(HttpMethod.DELETE, "/paciente/eliminar/{id}").authenticated();
                     http.requestMatchers(HttpMethod.PUT, "/paciente/modificar").authenticated();
-                    http.requestMatchers(HttpMethod.PUT, "/consulta").authenticated();
+                    // EndPoints privados Psicologos
+                    http.requestMatchers(HttpMethod.GET, "/psicologo/listarPsicologos").authenticated();
+                    http.requestMatchers(HttpMethod.POST, "/psicologo/crear").authenticated();
+                    http.requestMatchers(HttpMethod.DELETE, "/psicologo/eliminar/{id}").authenticated();
+                    // EndPoint privado Consulta
+                    http.requestMatchers(HttpMethod.POST, "/consulta/crear").authenticated();
+                    http.requestMatchers(HttpMethod.GET, "/consulta/listarConsultas").authenticated();
                     // Swagger-ui
-                    http.requestMatchers("/swagger-ui.html", "/v3/api-docs/**","/swagger-ui/**").permitAll(); //Necesario para Swagger UI
+                    http.requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll(); //Necesario para Swagger UI
                     // Permitir solicitudes OPTIONS para CORS
                     http.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     http.anyRequest().denyAll();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
-        
+
         return httpSecurity.build();
     }
 
