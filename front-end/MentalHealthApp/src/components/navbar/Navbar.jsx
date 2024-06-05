@@ -8,20 +8,21 @@ import styles from './Navbar.module.css'
 
 const Navbar = () => {
   return (
-      <header className={styles.container}>
-        <img className={styles.logo} 
+    <header className={styles.container}>
+      <img className={styles.logo}
         src={logo} alt="sadj" />
-        <div className={styles.button_container}>
+      <div className={styles.button_container}>
+        <Link to={'login'}>
           <button className={styles.button_transparent}>
             Ingresar
-            <Link to={'/login'}/>
           </button>
-          <button className={styles.button}>
-            Registrarme
-            <Link to={'/signup'}/>
-          </button>
-        </div>
-      </header>
+        </Link>
+        <button className={styles.button}>
+          Registrarme
+          <Link to={'/signup'} />
+        </button>
+      </div>
+    </header>
   )
 }
 
