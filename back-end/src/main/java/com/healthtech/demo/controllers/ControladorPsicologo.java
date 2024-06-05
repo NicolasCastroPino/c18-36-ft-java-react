@@ -4,6 +4,7 @@ import com.healthtech.demo.dto.CrearPsicologoDTO;
 import com.healthtech.demo.dto.ListarPsicologoDTO;
 import com.healthtech.demo.entities.Psicologo;
 import com.healthtech.demo.services.PsicologoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@SecurityRequirement(name = "bearer-key") //Necesario para Swagger UI con Bearer Tokens
 @RequestMapping({"/psicologo"})
 public class ControladorPsicologo {
     @Autowired
@@ -36,15 +38,26 @@ public class ControladorPsicologo {
         return ResponseEntity.ok("El objeto fue eliminado correctamente");
     }
 
-    @GetMapping({"/listarpsicologos"})
+    @GetMapping({"/listarPsicologos"})
     public ResponseEntity<List<ListarPsicologoDTO>> listarPsicologos() {
         List<Psicologo> psicologos = psicologoService.getPsicologos();
-        //Herramienta para mapear DTOs de forma automatica
-        ModelMapper modelMapper = new ModelMapper();
+        //Herramienta para mapear DTOs de forma automatica (Funciona solo con clases)
+//        ModelMapper modelMapper = new ModelMapper();
+//
+//        List<ListarPsicologoDTO> psicologoDTO = psicologos.stream()
+//                .map(psicologo -> modelMapper.map(psicologo, ListarPsicologoDTO.class))
+//                .collect(Collectors.toList());
 
         List<ListarPsicologoDTO> psicologoDTO = psicologos.stream()
-                .map(psicologo -> modelMapper.map(psicologo, ListarPsicologoDTO.class))
-                .collect(Collectors.toList());
+                .map(psicologo -> new ListarPsicologoDTO(
+                psicologo.getId(),
+                psicologo.getNombre(),
+                psicologo.getApellido(),
+                psicologo.getEmail(),
+                psicologo.getTelefono(),
+                psicologo.getDocumento(),
+                psicologo.getValoracion(),
+                psicologo.getEspecialidad())).collect(Collectors.toList());
 
         return ResponseEntity.ok(psicologoDTO);
     }

@@ -26,12 +26,12 @@ public class Paciente {
 
     private String documento;
 
-    private boolean activo;
+    private Boolean activo;
 
     @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Consulta consulta; // Relación uno a uno con Consulta
 
-    @ManyToMany(mappedBy = "pacientes", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "pacientes", fetch = FetchType.EAGER)
     private List<Psicologo> psicologos;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)

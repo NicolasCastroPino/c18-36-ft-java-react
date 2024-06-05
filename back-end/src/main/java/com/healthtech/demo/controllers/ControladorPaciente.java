@@ -3,6 +3,7 @@ package com.healthtech.demo.controllers;
 import com.healthtech.demo.dto.*;
 import com.healthtech.demo.entities.Paciente;
 import com.healthtech.demo.services.PacienteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/paciente")
+@SecurityRequirement(name = "bearer-key") //Necesario para Swagger UI con Bearer Tokens
 public class ControladorPaciente {
 
     //Se usa Autowired solo durante la prueba

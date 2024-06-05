@@ -3,12 +3,14 @@ package com.healthtech.demo.services;
 import com.healthtech.demo.dto.ActualizarPacienteDTO;
 import com.healthtech.demo.dto.CrearPacienteDTO;
 import com.healthtech.demo.entities.Paciente;
+import com.healthtech.demo.entities.Usuario;
 import com.healthtech.demo.manejoErrores.ValidacionDeIntegridad;
 import com.healthtech.demo.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -17,12 +19,15 @@ public class PacienteService implements IPacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<Paciente> getPacientes() {
         List<Paciente> listaPacientes = pacienteRepository.findAll();
         return listaPacientes;
     }
-    
+
     //Nuevo Codigo de Cristian
     @Override
     public Paciente savePaciente(CrearPacienteDTO paciente) {
@@ -30,8 +35,11 @@ public class PacienteService implements IPacienteService {
         if (existe) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El paciente ya existe");
         }
-        Paciente pacienteGuardado = pacienteRepository.save(new Paciente(paciente));
-        return pacienteGuardado;
+        Usuario usuario = new Usuario(paciente.usuario());
+        usuario.setContrasenia(passwordEncoder.encode(paciente.usuario().contrasenia()));
+        Paciente pacienteGuardado = new Paciente(paciente);
+        pacienteGuardado.setUsuario(usuario);
+        return pacienteRepository.save(pacienteGuardado);
     }
 
     //Nuevo Codigo de Cristian
@@ -61,5 +69,4 @@ public class PacienteService implements IPacienteService {
         pacienteElegido.ActualizarEntidadPaciente(paciente);
         return pacienteElegido;
     }
-
 }

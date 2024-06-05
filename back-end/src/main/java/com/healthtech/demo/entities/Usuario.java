@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Data
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario implements UserDetails{
@@ -23,7 +24,7 @@ public class Usuario implements UserDetails{
     
     private String contrasenia;
 
-    Usuario(UsuarioDTO usuarioDTO) {
+    public Usuario(UsuarioDTO usuarioDTO) {
         this.usuario = usuarioDTO.usuario();
         this.contrasenia = usuarioDTO.contrasenia();
     }
