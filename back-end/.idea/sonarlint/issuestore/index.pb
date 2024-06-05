@@ -57,3 +57,9 @@ g
 7src/main/java/com/healthtech/demo/entities/Emocion.java,6\4\6401f6ffd0e1e771436fb96a78754d4d629a1b89
 j
 :src/main/java/com/healthtech/demo/dto/CrearEmocionDTO.java,6\d\6d688b9ebbe2c2351b7089618443866524ff49b4
+l
+<src/main/java/com/healthtech/demo/dto/ListarPacienteDTO.java,0\0\0064e71a16127b585d522eb61695caae82e79303
+k
+;src/main/java/com/healthtech/demo/dto/ListarEmocionDTO.java,d\5\d517edaa5de8c690ec5944228db1f2c652fda7c3
+t
+Dsrc/main/java/com/healthtech/demo/controllers/ControlaorEmocion.java,6\6\66baa561fb2bc8d149b0ce5fad24d839734c1a1e

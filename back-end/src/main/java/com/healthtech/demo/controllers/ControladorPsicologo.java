@@ -30,7 +30,7 @@ public class ControladorPsicologo {
     }
 
     @Transactional
-    @PostMapping({"/eliminar/{id}"})
+    @DeleteMapping({"/eliminar/{id}"})
     public ResponseEntity eliminarPsicologo(@PathVariable Long id) {
         psicologoService.deletePsicologo(id);
         return ResponseEntity.ok("El objeto fue eliminado correctamente");
