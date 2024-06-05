@@ -10,17 +10,18 @@ const Navbar = () => {
   return (
     <header className={styles.container}>
       <img className={styles.logo}
-        src={logo} alt="sadj" />
+        src={logo} alt="logo" />
       <div className={styles.button_container}>
-        <Link to={'login'}>
+        <Link to={'/login'}>
           <button className={styles.button_transparent}>
             Ingresar
           </button>
         </Link>
-        <button className={styles.button}>
-          Registrarme
-          <Link to={'/signup'} />
-        </button>
+        <Link to={'/signup'}>
+          <button className={styles.button}>
+            Registrarme
+          </button>
+        </Link>
       </div>
     </header>
   )

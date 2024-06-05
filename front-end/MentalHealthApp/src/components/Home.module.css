@@ -17,6 +17,10 @@
 .article h1 {
   font-size: 50px;
   font-weight: normal;
+  background: -webkit-linear-gradient(45deg, var(--color2), var(--color3));
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .item_container{

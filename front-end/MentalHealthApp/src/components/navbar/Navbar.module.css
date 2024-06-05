@@ -26,6 +26,9 @@
   font-size: 24px;
   color: #FAF7F5;
   text-decoration: none;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .button_transparent {
@@ -41,6 +44,9 @@
   background-origin: border-box;
   background-clip: content-box, border-box;
   box-shadow: 2px 1000px 1px var(--main-bg-color) inset;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .button a{
