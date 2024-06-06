@@ -85,7 +85,7 @@ export const CreateUser = () => {
               onChange={catchInputs} />
           </div>
           <button className={styles.button}>
-            Ingresar
+            Crear
           </button>
         </form>
         <span>
