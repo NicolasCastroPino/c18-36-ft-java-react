@@ -14,23 +14,25 @@ export const Login = () => {
   const [csrfToken, setcsrfToken] = useState('');
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const res = await fetch('http://localhost:8080/csrf-token', {
-          method: 'GET',
-          credentials: 'include'
-        })
-        const data = await res.json();
-        setcsrfToken(data.token)
-        console.log('CSRFToken: ', data.token);
-      }
-      catch (error) {
-        console.error('Error al obtener el token CSRF');
-      }
-    }
-    fetchToken()
-  }, [])
+
+  // GET TOKEN
+  // useEffect(() => {
+  //   const fetchToken = async () => {
+  //     try {
+  //       const res = await fetch('http://localhost:8080/csrf-token', {
+  //         method: 'GET',
+  //         credentials: 'include'
+  //       })
+  //       const data = await res.json();
+  //       setcsrfToken(data.token)
+  //       console.log('CSRFToken: ', data.token);
+  //     }
+  //     catch (error) {
+  //       console.error('Error al obtener el token CSRF');
+  //     }
+  //   }
+  //   fetchToken()
+  // }, [])
 
   const catchInputs = (e) => {
     const { name, value } = e.target;
@@ -45,26 +47,27 @@ export const Login = () => {
       contrasenia: user.password
     }
 
-    try {
-      const res = await fetch('http://localhost:8080/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-XSRF-TOKEN': csrfToken
-        },
-        credentials: 'include',
-        body: JSON.stringify(userDTO)
-      });
+    // LOGIN
+    // try {
+    //   const res = await fetch('http://localhost:8080/auth/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'X-XSRF-TOKEN': csrfToken
+    //     },
+    //     credentials: 'include',
+    //     body: JSON.stringify(userDTO)
+    //   });
 
-      const data = await res.json();
-      const token = data.token;
-      localStorage.setItem('jwt', token);
-      navigate('/dashboard')
-    }
+    //   const data = await res.json();
+    //   const token = data.token;
+    //   localStorage.setItem('jwt', token);
+    //   navigate('/dashboard')
+    // }
 
-    catch (error) {
-      console.error('Hubo un error al iniciar sesion: ', error);
-    }
+    // catch (error) {
+    //   console.error('Hubo un error al iniciar sesion: ', error);
+    // }
   }
 
   return (
