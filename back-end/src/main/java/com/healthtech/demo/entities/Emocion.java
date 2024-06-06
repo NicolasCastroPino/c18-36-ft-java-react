@@ -45,6 +45,12 @@ public class Emocion {
         if (emocionActualizada.descripcion() != null) {
             this.descripcion = emocionActualizada.descripcion();
         }
+        if (emocionActualizada.accion() != null) {
+            this.accion = emocionActualizada.accion();
+        }
+        if (emocionActualizada.tipoEmocion() != null) {
+            this.tipoEmocion = emocionActualizada.tipoEmocion();
+        }
     }
 
 }

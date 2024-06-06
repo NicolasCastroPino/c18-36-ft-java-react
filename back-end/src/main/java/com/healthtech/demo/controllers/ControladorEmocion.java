@@ -1,5 +1,6 @@
 package com.healthtech.demo.controllers;
 
+import com.healthtech.demo.dto.ActualizarEmocionDTO;
 import com.healthtech.demo.dto.CrearEmocionDTO;
 import com.healthtech.demo.dto.ListarEmocionDTO;
 import com.healthtech.demo.entities.Emocion;
@@ -21,6 +22,7 @@ public class ControladorEmocion {
     @Autowired
     private EmocionService emocionService;
 
+    /*  PARECE NO FUNCIONAR EL MODELMAPPER CON RECORDS
     @GetMapping("/listaremociones")
     public ResponseEntity<List<ListarEmocionDTO>> listarEmociones() {
         List<Emocion> emocionList = emocionService.getEmociones();
@@ -31,6 +33,19 @@ public class ControladorEmocion {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(emocionDTOS);
+    }*/
+
+    @GetMapping("/listaremociones")
+    public ResponseEntity<List<ListarEmocionDTO>> listarEmociones() {
+        List<Emocion> emocionList = emocionService.getEmociones();
+        List<ListarEmocionDTO> emocionDTO = emocionList.stream()
+                .map(emocion -> new ListarEmocionDTO(
+                        emocion.getId(),
+                        emocion.getFechaCreacion(),
+                        emocion.getDescripcion(),
+                        emocion.getAccion(),
+                        emocion.getTipoEmocion())).collect(Collectors.toList());
+        return ResponseEntity.ok(emocionDTO);
     }
 
     @Transactional
@@ -40,5 +55,34 @@ public class ControladorEmocion {
         return ResponseEntity.status(HttpStatus.CREATED).body(emocion);
     }
 
+    @GetMapping("/seleccionar/{id}")
+    public ResponseEntity<ListarEmocionDTO> seleccionarEmocion(@PathVariable Long id) {
+        Emocion emocionSeleccionada = emocionService.elegirEmocion(id);
+        ListarEmocionDTO emocionDTO = new ListarEmocionDTO(
+                emocionSeleccionada.getId(),
+                emocionSeleccionada.getFechaCreacion(),
+                emocionSeleccionada.getDescripcion(),
+                emocionSeleccionada.getAccion(),
+                emocionSeleccionada.getTipoEmocion());
+        return ResponseEntity.ok(emocionDTO);
+    }
 
+    @Transactional
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity eliminarEmocion(@PathVariable Long id) {
+        emocionService.deleteEmocion(id);
+        return ResponseEntity.ok("Eliminado exitosamente");
+    }
+
+    @Transactional
+    @PutMapping("/modificar")
+    public ResponseEntity<ActualizarEmocionDTO> actualizarEmocion(@RequestBody @Valid ActualizarEmocionDTO emocion) {
+        Emocion emocionModificada = emocionService.modificarEmocion(emocion);
+        ActualizarEmocionDTO emocionDTO = new ActualizarEmocionDTO(
+                emocionModificada.getId(),
+                emocionModificada.getTipoEmocion(),
+                emocionModificada.getDescripcion(),
+                emocionModificada.getAccion());
+        return ResponseEntity.ok(emocionDTO);
+    }
 }

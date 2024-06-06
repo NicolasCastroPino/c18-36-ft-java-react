@@ -10,6 +10,7 @@ public record ActualizarPsicologoDTO(
         String apellido,
         String email,
         String telefono,
+        String documento,
         Especialidad especialidad) {
 
 }

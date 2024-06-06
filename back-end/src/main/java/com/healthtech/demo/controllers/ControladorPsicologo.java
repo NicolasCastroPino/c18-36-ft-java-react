@@ -1,5 +1,6 @@
 package com.healthtech.demo.controllers;
 
+import com.healthtech.demo.dto.ActualizarPsicologoDTO;
 import com.healthtech.demo.dto.CrearPsicologoDTO;
 import com.healthtech.demo.dto.ListarPsicologoDTO;
 import com.healthtech.demo.entities.Psicologo;
@@ -50,14 +51,47 @@ public class ControladorPsicologo {
 
         List<ListarPsicologoDTO> psicologoDTO = psicologos.stream()
                 .map(psicologo -> new ListarPsicologoDTO(
-                psicologo.getId(),
-                psicologo.getNombre(),
-                psicologo.getApellido(),
-                psicologo.getEmail(),
-                psicologo.getTelefono(),
-                psicologo.getDocumento(),
-                psicologo.getValoracion(),
-                psicologo.getEspecialidad())).collect(Collectors.toList());
+                        psicologo.getId(),
+                        psicologo.getNombre(),
+                        psicologo.getApellido(),
+                        psicologo.getEmail(),
+                        psicologo.getTelefono(),
+                        psicologo.getDocumento(),
+                        psicologo.getValoracion(),
+                        psicologo.getEspecialidad())).collect(Collectors.toList());
+
+        return ResponseEntity.ok(psicologoDTO);
+    }
+
+    @GetMapping("/seleccionar/{id}")
+    public ResponseEntity<ListarPsicologoDTO> seleccionarPsicologo(@PathVariable Long id) {
+        Psicologo psicologoSeleccionado = psicologoService.elegirPsicologo(id);
+        ListarPsicologoDTO psicologoDTO = new ListarPsicologoDTO(
+                psicologoSeleccionado.getId(),
+                psicologoSeleccionado.getNombre(),
+                psicologoSeleccionado.getApellido(),
+                psicologoSeleccionado.getEmail(),
+                psicologoSeleccionado.getTelefono(),
+                psicologoSeleccionado.getDocumento(),
+                psicologoSeleccionado.getValoracion(),
+                psicologoSeleccionado.getEspecialidad());
+
+        return ResponseEntity.ok(psicologoDTO);
+    }
+
+    @Transactional
+    @PutMapping("/modificar")
+    public ResponseEntity<ActualizarPsicologoDTO> actualizarPsicologo(@RequestBody @Valid ActualizarPsicologoDTO psicologo) {
+        Psicologo psicologoModificado = psicologoService.modificarPsicologo(psicologo);
+        ActualizarPsicologoDTO psicologoDTO = new ActualizarPsicologoDTO(
+                psicologoModificado.getId(),
+                psicologoModificado.getNombre(),
+                psicologoModificado.getApellido(),
+                psicologoModificado.getEmail(),
+                psicologoModificado.getTelefono(),
+                psicologoModificado.getDocumento(),
+                psicologoModificado.getEspecialidad()
+        );
 
         return ResponseEntity.ok(psicologoDTO);
     }
