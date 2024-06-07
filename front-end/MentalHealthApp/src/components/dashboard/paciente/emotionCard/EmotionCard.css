@@ -1,0 +1,16 @@
+.emotionCard-container{
+    display: flex;
+    flex-direction: column;
+   
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: #D5DF67;
+    margin: 15px;
+    gap: 5px;
+
+}
+.info-emotion{
+    padding: 10px;
+    overflow: hidden;
+}
