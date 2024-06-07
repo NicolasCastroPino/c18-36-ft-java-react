@@ -1,8 +1,10 @@
 package com.healthtech.demo.services;
 
+import com.healthtech.demo.dto.ActualizarPsicologoDTO;
 import com.healthtech.demo.dto.CrearPsicologoDTO;
 import com.healthtech.demo.entities.Psicologo;
 import com.healthtech.demo.entities.Usuario;
+import com.healthtech.demo.manejoErrores.ValidacionDeIntegridad;
 import com.healthtech.demo.repositories.PsicologoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +23,13 @@ public class PsicologoService implements IPsicologoService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     public List<Psicologo> getPsicologos() {
         List<Psicologo> listaPsicologos = this.psicologoRepository.findAll();
         return listaPsicologos;
     }
 
+    @Override
     public Psicologo savePsicologo(CrearPsicologoDTO psicologo) {
         boolean existe = this.psicologoRepository.existsByDocumento(psicologo.documento());
         if (existe) {
@@ -39,7 +43,27 @@ public class PsicologoService implements IPsicologoService {
         }
     }
 
+    @Override
     public void deletePsicologo(Long id) {
-        this.psicologoRepository.deleteById(id);
+        psicologoRepository.deleteById(id);
+    }
+
+    @Override
+    public Psicologo modificarPsicologo(ActualizarPsicologoDTO psicologoDTO) {
+        if (!psicologoRepository.findById(psicologoDTO.id()).isPresent()){
+            throw new ValidacionDeIntegridad("El id del psicologo no existe");
+        }
+        Psicologo psicologoSeleccionado = psicologoRepository.getReferenceById(psicologoDTO.id());
+        psicologoSeleccionado.ActualizarPsicologo(psicologoDTO);
+        return psicologoSeleccionado;
+    }
+
+    @Override
+    public Psicologo elegirPsicologo(Long id) {
+        if (!psicologoRepository.findById(id).isPresent()){
+            throw new ValidacionDeIntegridad("El id del psicologo no existe");
+        }
+        Psicologo psicologo = psicologoRepository.getReferenceById(id);
+        return psicologo;
     }
 }

@@ -1,10 +1,14 @@
 package com.healthtech.demo.entities;
 
+import com.healthtech.demo.dto.ActualizarPsicologoDTO;
 import com.healthtech.demo.dto.CrearPsicologoDTO;
 import com.healthtech.demo.enums.Especialidad;
 import jakarta.persistence.*;
+
 import java.util.List;
+
 import lombok.*;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
@@ -45,8 +49,8 @@ public class Psicologo {
 
     @OneToOne(mappedBy = "psicologo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Consulta consulta; // Relación uno a uno con Consulta
-    
-    
+
+
     public Psicologo(CrearPsicologoDTO psicologo) {
         this.nombre = psicologo.nombre();
         this.apellido = psicologo.apellido();
@@ -57,6 +61,27 @@ public class Psicologo {
         this.valoracion = ThreadLocalRandom.current().nextInt(3, 6);
         this.especialidad = psicologo.especialidad();
         this.usuario = new Usuario(psicologo.usuario());
+    }
+
+    public void ActualizarPsicologo(ActualizarPsicologoDTO psicologoActualizado) {
+        if (psicologoActualizado.nombre() != null) {
+            this.nombre = psicologoActualizado.nombre();
+        }
+        if (psicologoActualizado.apellido() != null) {
+            this.apellido = psicologoActualizado.apellido();
+        }
+        if (psicologoActualizado.email() != null) {
+            this.email = psicologoActualizado.email();
+        }
+        if (psicologoActualizado.telefono() != null) {
+            this.telefono = psicologoActualizado.telefono();
+        }
+        if (psicologoActualizado.documento() != null) {
+            this.documento = psicologoActualizado.documento();
+        }
+        if (psicologoActualizado.especialidad() != null) {
+            this.especialidad = psicologoActualizado.especialidad();
+        }
     }
 }
 
