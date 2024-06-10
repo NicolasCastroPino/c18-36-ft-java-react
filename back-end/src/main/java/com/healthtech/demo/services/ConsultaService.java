@@ -6,7 +6,10 @@ import com.healthtech.demo.entities.Psicologo;
 import com.healthtech.demo.filtroConsultas.FiltroDeConsultas;
 import com.healthtech.demo.manejoErrores.ValidacionDeIntegridad;
 import com.healthtech.demo.repositories.*;
+
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,7 +21,7 @@ public class ConsultaService implements IConsultaService {
     private PacienteRepository pacienteRepository;
     @Autowired
     private PsicologoRepository psicologoRepository;
-    
+
     @Autowired
     private ConsultaRepository consultaRepository;
 
@@ -49,18 +52,29 @@ public class ConsultaService implements IConsultaService {
             throw new ValidacionDeIntegridad("no existen psicologos disponibles para este horario y especialidad");
         }
 
+        //CODIGO NUEVO DE NICOLAS PARA GENERAR LINK VIDEOLLAMADA
+        String linkVideollamada = generLinkVideollamada();
+
         //Creamos una nueva Entidad Consulta
-        var consulta = new Consulta(psicologo, paciente, datos.fecha());
+        var consulta = new Consulta(psicologo, paciente, datos.fecha(), linkVideollamada);
 
         //Guardamos la nueva Entidad Consulta en la Base de Datos
         consultaRepository.save(consulta);
-        
+
         return consulta;
     }
-    
+
     @Override
     public List<Consulta> getConsultas() {
         List<Consulta> listaConsultas = consultaRepository.findAll();
         return listaConsultas;
+    }
+
+    //NUEVO CODIGO PARA GENERAR LINK VIDEO LLAMADA
+    private String generLinkVideollamada() {
+        //DE ESTA FORMA, CADA VEZ QUE SE GENERE UNA NUEVA CITA,
+        //SE GENERARÁ UNA NUEVA SALA ÚNICA.
+        String roomName = "room" + UUID.randomUUID().toString();
+        return "https://meet.jit.si/" + roomName;
     }
 }
