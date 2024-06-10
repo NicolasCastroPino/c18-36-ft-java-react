@@ -24,14 +24,13 @@ public class Consulta {
     private Paciente paciente; // Relación uno a uno con Paciente
 
     private LocalDateTime fecha;
-    private String linkVideollamada; //NUEVO CODIGO PARA GENERAR LINK VIDEO LLAMADA
 
-    public Consulta(Psicologo psicologo, Paciente paciente, LocalDateTime fecha, String link) {
+    public Consulta(Psicologo psicologo, Paciente paciente, LocalDateTime fecha) {
         this.psicologo = psicologo;
         this.paciente = paciente;
         this.fecha = fecha;
-        this.linkVideollamada = link; //NUEVO CODIGO PARA GENERAR LINK VIDEO LLAMADA
     }
 }
+
 
 

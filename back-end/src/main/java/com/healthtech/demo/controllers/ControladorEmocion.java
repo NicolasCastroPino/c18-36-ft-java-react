@@ -5,7 +5,6 @@ import com.healthtech.demo.dto.CrearEmocionDTO;
 import com.healthtech.demo.dto.ListarEmocionDTO;
 import com.healthtech.demo.entities.Emocion;
 import com.healthtech.demo.services.EmocionService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/emocion")
-@SecurityRequirement(name = "bearer-key") //Necesario para Swagger UI con Bearer Tokens
 public class ControladorEmocion {
     @Autowired
     private EmocionService emocionService;

@@ -44,7 +44,6 @@ com\healthtech\demo\dto\ActualizarPsicologoDTO.class
 com\healthtech\demo\controllers\CSRFController.class
 com\healthtech\demo\services\ConsultaService.class
 com\healthtech\demo\services\IPacienteService.class
-com\healthtech\demo\services\EmailService.class
 com\healthtech\demo\manejoErrores\ManejoErrores$DatosErrorValidacion.class
 com\healthtech\demo\entities\Psicologo.class
 com\healthtech\demo\services\IUsuarioService.class

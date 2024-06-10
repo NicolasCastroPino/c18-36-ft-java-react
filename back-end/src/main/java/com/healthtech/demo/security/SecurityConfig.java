@@ -29,8 +29,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                //csrf(csrf->csrf.disable())
-                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                .csrf(csrf->csrf.disable())
+                //.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
                     // EndPoints públicos
@@ -46,12 +46,6 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.GET, "/psicologo/listarPsicologos").authenticated();
                     http.requestMatchers(HttpMethod.POST, "/psicologo/crear").authenticated();
                     http.requestMatchers(HttpMethod.DELETE, "/psicologo/eliminar/{id}").authenticated();
-                    //EndPoints privados Emocion
-                    http.requestMatchers(HttpMethod.GET, "/emocion/listaremociones").authenticated();
-                    http.requestMatchers(HttpMethod.POST, "/emocion/crear").authenticated();
-                    http.requestMatchers(HttpMethod.GET, "/emocion/seleccionar/{id}").authenticated();
-                    http.requestMatchers(HttpMethod.DELETE, "/emocion/eliminar/{id}").authenticated();
-                    http.requestMatchers(HttpMethod.PUT, "/emocion/modifica").authenticated();
                     // EndPoint privado Consulta
                     http.requestMatchers(HttpMethod.POST, "/consulta/crear").authenticated();
                     http.requestMatchers(HttpMethod.GET, "/consulta/listarConsultas").authenticated();
@@ -65,7 +59,6 @@ public class SecurityConfig {
 
         return httpSecurity.build();
     }
-    
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
