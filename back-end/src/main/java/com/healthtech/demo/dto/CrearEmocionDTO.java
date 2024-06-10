@@ -10,7 +10,6 @@ import java.util.List;
 
 public record CrearEmocionDTO(
         @NotBlank
-        @Size(min = 1, max = 30)
         String descripcion,
         @NotBlank
         @Size(min = 1, max = 30)
