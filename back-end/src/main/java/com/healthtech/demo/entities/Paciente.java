@@ -25,6 +25,8 @@ public class Paciente {
     private String telefono;
 
     private String documento;
+    
+    private String rol;
 
     private Boolean activo;
 
@@ -47,6 +49,7 @@ public class Paciente {
         this.email = paciente.email();
         this.telefono = paciente.telefono();
         this.documento = paciente.documento();
+        this.rol = "PACIENTE";
         this.activo = true;
         this.usuario = new Usuario(paciente.usuario());
     }

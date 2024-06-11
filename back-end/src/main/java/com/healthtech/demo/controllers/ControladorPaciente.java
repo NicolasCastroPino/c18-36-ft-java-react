@@ -38,8 +38,8 @@ public class ControladorPaciente {
                 paciente.getApellido(),
                 paciente.getEmail(),
                 paciente.getTelefono(),
-                paciente.getDocumento())).collect(Collectors.toList());
-        
+                paciente.getDocumento(),
+                paciente.getRol())).collect(Collectors.toList());
         return ResponseEntity.ok(pacientesDTO);
     }
 
@@ -52,7 +52,8 @@ public class ControladorPaciente {
                 pacienteElegido.getApellido(),
                 pacienteElegido.getEmail(),
                 pacienteElegido.getTelefono(),
-                pacienteElegido.getDocumento());
+                pacienteElegido.getDocumento(),
+                pacienteElegido.getRol());
         return ResponseEntity.ok(pacienteDTO);
     }
 

@@ -6,5 +6,6 @@ public record ListarPacienteDTO(
         String apellido,
         String email,
         String telefono,
-        String documento) {
+        String documento,
+        String rol) {
 }

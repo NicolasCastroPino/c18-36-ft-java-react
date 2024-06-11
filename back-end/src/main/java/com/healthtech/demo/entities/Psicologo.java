@@ -32,6 +32,8 @@ public class Psicologo {
     private String documento;
 
     private String descripcion;
+    
+    private String rol;
 
     private Boolean activo;
 
@@ -59,6 +61,7 @@ public class Psicologo {
         this.telefono = psicologo.telefono();
         this.documento = psicologo.documento();
         this.descripcion = psicologo.descripcion();
+        this.rol = "PSICOLOGO";
         this.activo = true;
         this.valoracion = ThreadLocalRandom.current().nextInt(3, 6);
         this.especialidad = psicologo.especialidad();

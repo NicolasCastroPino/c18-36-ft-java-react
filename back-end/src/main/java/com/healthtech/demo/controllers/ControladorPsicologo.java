@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 @SecurityRequirement(name = "bearer-key") //Necesario para Swagger UI con Bearer Tokens
 @RequestMapping({"/psicologo"})
 public class ControladorPsicologo {
+
     @Autowired
     private PsicologoService psicologoService;
-
 
     @Transactional
     @PostMapping({"/crear"})
@@ -51,15 +51,16 @@ public class ControladorPsicologo {
 
         List<ListarPsicologoDTO> psicologoDTO = psicologos.stream()
                 .map(psicologo -> new ListarPsicologoDTO(
-                        psicologo.getId(),
-                        psicologo.getNombre(),
-                        psicologo.getApellido(),
-                        psicologo.getEmail(),
-                        psicologo.getTelefono(),
-                        psicologo.getDocumento(),
-                        psicologo.getDescripcion(),
-                        psicologo.getValoracion(),
-                        psicologo.getEspecialidad())).collect(Collectors.toList());
+                psicologo.getId(),
+                psicologo.getNombre(),
+                psicologo.getApellido(),
+                psicologo.getEmail(),
+                psicologo.getTelefono(),
+                psicologo.getDocumento(),
+                psicologo.getDescripcion(),
+                psicologo.getRol(),
+                psicologo.getValoracion(),
+                psicologo.getEspecialidad())).collect(Collectors.toList());
 
         return ResponseEntity.ok(psicologoDTO);
     }
@@ -75,6 +76,7 @@ public class ControladorPsicologo {
                 psicologoSeleccionado.getTelefono(),
                 psicologoSeleccionado.getDocumento(),
                 psicologoSeleccionado.getDescripcion(),
+                psicologoSeleccionado.getRol(),
                 psicologoSeleccionado.getValoracion(),
                 psicologoSeleccionado.getEspecialidad());
 

@@ -10,6 +10,7 @@ public record ListarPsicologoDTO(
         String telefono,
         String documento,
         String descripcion,
+        String rol,
         int valoracion,
         Especialidad especialidad) {
 }
