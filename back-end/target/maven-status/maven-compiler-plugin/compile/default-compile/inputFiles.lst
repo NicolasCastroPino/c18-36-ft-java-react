@@ -37,6 +37,7 @@ F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthte
 F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthtech\demo\dto\DetallesConsultaDTO.java
 F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthtech\demo\services\PacienteService.java
 F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthtech\demo\manejoErrores\ManejoErrores.java
+F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthtech\demo\services\EmailService.java
 F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthtech\demo\entities\Usuario.java
 F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthtech\demo\services\IUsuarioService.java
 F:\Cosas\Programas\Java\c18-36-ft-java-react\back-end\src\main\java\com\healthtech\demo\controllers\CSRFController.java

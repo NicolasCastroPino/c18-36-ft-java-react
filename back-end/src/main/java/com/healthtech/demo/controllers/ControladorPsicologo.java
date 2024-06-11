@@ -57,6 +57,7 @@ public class ControladorPsicologo {
                         psicologo.getEmail(),
                         psicologo.getTelefono(),
                         psicologo.getDocumento(),
+                        psicologo.getDescripcion(),
                         psicologo.getValoracion(),
                         psicologo.getEspecialidad())).collect(Collectors.toList());
 
@@ -73,6 +74,7 @@ public class ControladorPsicologo {
                 psicologoSeleccionado.getEmail(),
                 psicologoSeleccionado.getTelefono(),
                 psicologoSeleccionado.getDocumento(),
+                psicologoSeleccionado.getDescripcion(),
                 psicologoSeleccionado.getValoracion(),
                 psicologoSeleccionado.getEspecialidad());
 
@@ -89,6 +91,7 @@ public class ControladorPsicologo {
                 psicologoModificado.getApellido(),
                 psicologoModificado.getEmail(),
                 psicologoModificado.getTelefono(),
+                psicologoModificado.getDescripcion(),
                 psicologoModificado.getDocumento(),
                 psicologoModificado.getEspecialidad()
         );

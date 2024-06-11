@@ -31,6 +31,8 @@ public class Psicologo {
 
     private String documento;
 
+    private String descripcion;
+
     private Boolean activo;
 
     private int valoracion;
@@ -50,13 +52,13 @@ public class Psicologo {
     @OneToOne(mappedBy = "psicologo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Consulta consulta; // Relación uno a uno con Consulta
 
-
     public Psicologo(CrearPsicologoDTO psicologo) {
         this.nombre = psicologo.nombre();
         this.apellido = psicologo.apellido();
         this.email = psicologo.email();
         this.telefono = psicologo.telefono();
         this.documento = psicologo.documento();
+        this.descripcion = psicologo.descripcion();
         this.activo = true;
         this.valoracion = ThreadLocalRandom.current().nextInt(3, 6);
         this.especialidad = psicologo.especialidad();
@@ -79,9 +81,11 @@ public class Psicologo {
         if (psicologoActualizado.documento() != null) {
             this.documento = psicologoActualizado.documento();
         }
+        if (psicologoActualizado.descripcion() != null) {
+            this.descripcion = psicologoActualizado.descripcion();
+        }
         if (psicologoActualizado.especialidad() != null) {
             this.especialidad = psicologoActualizado.especialidad();
         }
     }
 }
-

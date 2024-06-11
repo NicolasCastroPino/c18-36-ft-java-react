@@ -17,6 +17,8 @@ public record CrearPsicologoDTO(
         @NotNull
         String documento,
         @NotNull
+        String descripcion,
+        @NotNull
         Especialidad especialidad,
         @NotNull @Valid
         UsuarioDTO usuario){
