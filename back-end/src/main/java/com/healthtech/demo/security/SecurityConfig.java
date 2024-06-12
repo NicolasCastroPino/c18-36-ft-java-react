@@ -29,7 +29,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf(csrf->csrf.disable())
+                .csrf(csrf -> csrf.disable())
                 //.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
@@ -44,11 +44,18 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.PUT, "/paciente/modificar").authenticated();
                     // EndPoints privados Psicologos
                     http.requestMatchers(HttpMethod.GET, "/psicologo/listarPsicologos").authenticated();
+                    http.requestMatchers(HttpMethod.GET, "/psicologo/seleccionar/{id}").authenticated();
                     http.requestMatchers(HttpMethod.POST, "/psicologo/crear").authenticated();
                     http.requestMatchers(HttpMethod.DELETE, "/psicologo/eliminar/{id}").authenticated();
                     // EndPoint privado Consulta
                     http.requestMatchers(HttpMethod.POST, "/consulta/crear").authenticated();
                     http.requestMatchers(HttpMethod.GET, "/consulta/listarConsultas").authenticated();
+                    http.requestMatchers(HttpMethod.GET, "/consulta/seleccionar/{id}").authenticated();
+                    // EndPoint privado Emocion
+                    http.requestMatchers(HttpMethod.POST, "/emocion/crear").authenticated();
+                    http.requestMatchers(HttpMethod.GET, "/emocion/listarEmociones").authenticated();
+                    http.requestMatchers(HttpMethod.DELETE, "/emocion/eliminar/{id}").authenticated();
+                    http.requestMatchers(HttpMethod.PUT, "/emocion/modificar").authenticated();
                     // Swagger-ui
                     http.requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll(); //Necesario para Swagger UI
                     // Permitir solicitudes OPTIONS para CORS

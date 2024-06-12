@@ -35,7 +35,7 @@ public class ControladorEmocion {
         return ResponseEntity.ok(emocionDTOS);
     }*/
 
-    @GetMapping("/listaremociones")
+    @GetMapping("/listarEmociones")
     public ResponseEntity<List<ListarEmocionDTO>> listarEmociones() {
         List<Emocion> emocionList = emocionService.getEmociones();
         List<ListarEmocionDTO> emocionDTO = emocionList.stream()

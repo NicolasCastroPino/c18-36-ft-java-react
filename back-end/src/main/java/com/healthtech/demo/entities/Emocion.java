@@ -23,8 +23,8 @@ public class Emocion {
     private LocalDate fechaCreacion;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = TipoEmocion.class)
-    private List<TipoEmocion> tipoEmocion;
+    //@ElementCollection(targetClass = TipoEmocion.class) Usar esto si es una coleccion
+    private TipoEmocion tipoEmocion;
 
     private String descripcion;
     private String accion;

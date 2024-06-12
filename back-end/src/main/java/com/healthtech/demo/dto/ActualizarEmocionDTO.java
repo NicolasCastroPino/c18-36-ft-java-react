@@ -8,7 +8,7 @@ import java.util.List;
 public record ActualizarEmocionDTO(
         @NotNull
         Long id,
-        List<TipoEmocion> tipoEmocion,
+        TipoEmocion tipoEmocion,
         String descripcion,
         String accion) {
 }

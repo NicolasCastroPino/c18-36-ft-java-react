@@ -1,15 +1,16 @@
 package com.healthtech.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.healthtech.demo.enums.TipoEmocion;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public record ListarEmocionDTO(
         Long id,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
         LocalDate fechaCreacion,
         String descripcion,
         String accion,
-        List<TipoEmocion> tipoEmocion
+        TipoEmocion tipoEmocion
 ) {
 }
