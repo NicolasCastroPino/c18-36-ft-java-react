@@ -1,5 +1,6 @@
 package com.healthtech.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.healthtech.demo.enums.Especialidad;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Future;
@@ -17,7 +18,7 @@ public record CrearConsultaDTO(
         Long idPsicologo,
         @NotNull
         Long idPaciente,
-        @Future
         @NotNull
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
         LocalDateTime fecha){
 }

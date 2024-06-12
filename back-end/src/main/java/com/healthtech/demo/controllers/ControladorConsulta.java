@@ -30,6 +30,7 @@ public class ControladorConsulta {
         emailService.enviarConsultaPorMail(consulta.getPaciente().getEmail(), "Nueva cita programada", emailTexto);
         emailService.enviarConsultaPorMail(consulta.getPsicologo().getEmail(), "Nueva consulta", emailTexto);
 
+        //Esto devulve un error, pero si se guarda en la DB
         return ResponseEntity.ok(new DetallesConsultaDTO(
                 consulta.getId(),
                 new PsicologoDTO(consulta.getPsicologo().getNombre(), consulta.getPsicologo().getApellido(), consulta.getPsicologo().getDocumento()),
