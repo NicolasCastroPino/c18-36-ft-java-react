@@ -8,7 +8,6 @@ public record CrearEmocionDTO(
         Long idPaciente,
         @NotBlank
         String descripcion,
-        @NotBlank
         @NotNull
         TipoEmocion tipoEmocion) {
 
