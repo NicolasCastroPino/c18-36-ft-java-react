@@ -22,7 +22,7 @@ public class TokenService {
 
     private static final long EXPIRATION_TIME = 7200000; // 2 horas en milisegundos
 
-    public String generarToken(Usuario usuario) {
+    public String generarToken(Usuario usuario, String rol) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             Instant expirationTime = generarFechaExpiracion();
@@ -30,6 +30,7 @@ public class TokenService {
                     .withIssuer("mediHelp")
                     .withSubject(usuario.getUsuario())
                     .withClaim("id", usuario.getId())
+                    .withClaim("role", rol) // Añadir el rol al token
                     .withExpiresAt(expirationTime)
                     .sign(algorithm);
 
@@ -75,7 +76,6 @@ public class TokenService {
 //        System.out.println("Generated Expiration Time (LocalDateTime): " + LocalDateTime.ofInstant(expirationTime, ZoneOffset.UTC));
 //        return expirationTime;
 //    }
-    
     private Instant generarFechaExpiracion() {
         return LocalDateTime.now(ZoneOffset.UTC).plusHours(2).toInstant(ZoneOffset.UTC);
     }

@@ -60,10 +60,7 @@ public class PsicologoService implements IPsicologoService {
 
     @Override
     public Psicologo elegirPsicologo(Long id) {
-        if (!psicologoRepository.findById(id).isPresent()){
-            throw new ValidacionDeIntegridad("El id del psicologo no existe");
-        }
-        Psicologo psicologo = psicologoRepository.getReferenceById(id);
-        return psicologo;
+        return psicologoRepository.findByUsuarioId(id)
+                .orElseThrow(() -> new ValidacionDeIntegridad("El id del usuario no existe"));
     }
 }

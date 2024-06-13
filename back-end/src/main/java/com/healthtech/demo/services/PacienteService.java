@@ -53,11 +53,8 @@ public class PacienteService implements IPacienteService {
 
     //Nuevo Codigo de Cristian
     public Paciente elegirPaciente(Long id) {
-        if (!pacienteRepository.findById(id).isPresent()) {
-            throw new ValidacionDeIntegridad("El id del paciente no fue encontrado");
-        }
-        Paciente paciente = pacienteRepository.getReferenceById(id);
-        return paciente;
+        return pacienteRepository.findByUsuarioId(id)
+                .orElseThrow(() -> new ValidacionDeIntegridad("El id del usuario no existe"));
     }
 
     //Nuevo Codigo de Cristian
