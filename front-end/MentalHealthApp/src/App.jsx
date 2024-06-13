@@ -4,9 +4,8 @@ import { CreateUser } from "./components/createuser/CreateUser"
 import { HomePaciente } from "./components/dashboard/paciente/HomePaciente";
 import { HomeProfesional } from "./components/dashboard/profesional/Home/HomeProfesional";
 import { AgendaProfessional } from "./components/dashboard/profesional/Agenda/Agenda";
-
-import { CustomeProvider } from "../Context";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { CustomeProvider } from "../Context";
 
 function App() {
 
