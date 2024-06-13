@@ -21,7 +21,7 @@ public class ControladorAuntenticacion {
 
     @Autowired
     private PacienteService pacienteService;
-    
+
     @Autowired
     private PsicologoService psicologoService;
 
@@ -40,10 +40,13 @@ public class ControladorAuntenticacion {
 
         // Obtener el rol del usuario
         String rol = "UNKNOWN";
-        var paciente = pacienteService.elegirPaciente(usuario.getId());
-        if (paciente != null) {
-            rol = paciente.getRol();
-        } else {
+        try {
+            var paciente = pacienteService.elegirPaciente(usuario.getId());
+            if (paciente != null) {
+                rol = paciente.getRol();
+            }
+        } catch (Exception e) {
+            // No se encontró el paciente, intentar con psicólogo
             var psicologo = psicologoService.elegirPsicologo(usuario.getId());
             if (psicologo != null) {
                 rol = psicologo.getRol();
