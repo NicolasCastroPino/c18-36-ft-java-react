@@ -2,6 +2,7 @@ package com.healthtech.demo.controllers;
 
 import com.healthtech.demo.dto.ActualizarEmocionDTO;
 import com.healthtech.demo.dto.CrearEmocionDTO;
+import com.healthtech.demo.dto.EmocionPacienteDTO;
 import com.healthtech.demo.dto.ListarEmocionDTO;
 import com.healthtech.demo.entities.Emocion;
 import com.healthtech.demo.services.EmocionService;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/emocion")
 public class ControladorEmocion {
+
     @Autowired
     private EmocionService emocionService;
 
@@ -34,17 +36,21 @@ public class ControladorEmocion {
 
         return ResponseEntity.ok(emocionDTOS);
     }*/
-
     @GetMapping("/listarEmociones")
     public ResponseEntity<List<ListarEmocionDTO>> listarEmociones() {
         List<Emocion> emocionList = emocionService.getEmociones();
         List<ListarEmocionDTO> emocionDTO = emocionList.stream()
                 .map(emocion -> new ListarEmocionDTO(
-                        emocion.getId(),
-                        emocion.getFechaCreacion(),
-                        emocion.getDescripcion(),
-                        emocion.getAccion(),
-                        emocion.getTipoEmocion())).collect(Collectors.toList());
+                emocion.getId(),
+                emocion.getFechaCreacion(),
+                emocion.getDescripcion(),
+                emocion.getTipoEmocion(),
+                new EmocionPacienteDTO(
+                        emocion.getPaciente().getId(),
+                        emocion.getPaciente().getNombre(),
+                        emocion.getPaciente().getApellido(),
+                        emocion.getPaciente().getEmail(),
+                        emocion.getPaciente().getTelefono()))).collect(Collectors.toList());
         return ResponseEntity.ok(emocionDTO);
     }
 
@@ -56,15 +62,21 @@ public class ControladorEmocion {
     }
 
     @GetMapping("/seleccionar/{id}")
-    public ResponseEntity<ListarEmocionDTO> seleccionarEmocion(@PathVariable Long id) {
-        Emocion emocionSeleccionada = emocionService.elegirEmocion(id);
-        ListarEmocionDTO emocionDTO = new ListarEmocionDTO(
-                emocionSeleccionada.getId(),
-                emocionSeleccionada.getFechaCreacion(),
-                emocionSeleccionada.getDescripcion(),
-                emocionSeleccionada.getAccion(),
-                emocionSeleccionada.getTipoEmocion());
-        return ResponseEntity.ok(emocionDTO);
+    public ResponseEntity<List<ListarEmocionDTO>> seleccionarEmocion(@PathVariable Long id) {
+        List<Emocion> emocionesDelPaciente = emocionService.getEmocionesDelPaciente(id);
+        List<ListarEmocionDTO> emocionesDTO = emocionesDelPaciente.stream()
+                .map(emocion -> new ListarEmocionDTO(
+                emocion.getId(),
+                emocion.getFechaCreacion(),
+                emocion.getDescripcion(),
+                emocion.getTipoEmocion(),
+                new EmocionPacienteDTO(
+                        emocion.getPaciente().getId(),
+                        emocion.getPaciente().getNombre(),
+                        emocion.getPaciente().getApellido(),
+                        emocion.getPaciente().getEmail(),
+                        emocion.getPaciente().getTelefono()))).collect(Collectors.toList());
+        return ResponseEntity.ok(emocionesDTO);
     }
 
     @Transactional
@@ -81,8 +93,7 @@ public class ControladorEmocion {
         ActualizarEmocionDTO emocionDTO = new ActualizarEmocionDTO(
                 emocionModificada.getId(),
                 emocionModificada.getTipoEmocion(),
-                emocionModificada.getDescripcion(),
-                emocionModificada.getAccion());
+                emocionModificada.getDescripcion());
         return ResponseEntity.ok(emocionDTO);
     }
 }

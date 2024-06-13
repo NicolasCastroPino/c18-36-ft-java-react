@@ -9,6 +9,5 @@ public record ActualizarEmocionDTO(
         @NotNull
         Long id,
         TipoEmocion tipoEmocion,
-        String descripcion,
-        String accion) {
+        String descripcion) {
 }

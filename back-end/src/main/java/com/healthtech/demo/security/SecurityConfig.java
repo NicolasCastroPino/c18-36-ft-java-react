@@ -54,6 +54,7 @@ public class SecurityConfig {
                     // EndPoint privado Emocion
                     http.requestMatchers(HttpMethod.POST, "/emocion/crear").authenticated();
                     http.requestMatchers(HttpMethod.GET, "/emocion/listarEmociones").authenticated();
+                    http.requestMatchers(HttpMethod.GET, "/emocion/seleccionar/{id}").authenticated();
                     http.requestMatchers(HttpMethod.DELETE, "/emocion/eliminar/{id}").authenticated();
                     http.requestMatchers(HttpMethod.PUT, "/emocion/modificar").authenticated();
                     // Swagger-ui

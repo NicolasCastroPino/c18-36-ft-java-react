@@ -1,4 +1,5 @@
 com\healthtech\demo\services\IEmocionService.class
+com\healthtech\demo\dto\EmocionPacienteDTO.class
 com\healthtech\demo\dto\PacienteDTO.class
 com\healthtech\demo\enums\TipoEmocion.class
 com\healthtech\demo\services\IConsultaService.class

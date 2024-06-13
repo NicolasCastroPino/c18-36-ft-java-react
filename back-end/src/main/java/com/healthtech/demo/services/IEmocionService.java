@@ -19,7 +19,5 @@ public interface IEmocionService {
 
     Emocion modificarEmocion(ActualizarEmocionDTO emocionDTO);
 
-    Emocion elegirEmocion(Long id);
-
-
+    List<Emocion> getEmocionesDelPaciente(Long pacienteId);
 }

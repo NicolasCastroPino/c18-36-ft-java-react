@@ -5,6 +5,7 @@ import com.healthtech.demo.dto.CrearEmocionDTO;
 import com.healthtech.demo.entities.Emocion;
 import com.healthtech.demo.manejoErrores.ValidacionDeIntegridad;
 import com.healthtech.demo.repositories.EmocionRepository;
+import com.healthtech.demo.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class EmocionService implements IEmocionService {
     @Autowired
     private EmocionRepository emocionRepository;
 
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
     @Override
     public List<Emocion> getEmociones() {
         List<Emocion> listaEmociones = emocionRepository.findAll();
@@ -24,8 +28,10 @@ public class EmocionService implements IEmocionService {
 
     @Override
     public Emocion saveEmocion(CrearEmocionDTO emocionDTO) {
-        Emocion emocionGuardada = emocionRepository.save(new Emocion(emocionDTO));
-        return emocionGuardada;
+        var paciente = pacienteRepository.findById(emocionDTO.idPaciente()).get();
+        var emocion = new Emocion(emocionDTO, paciente);
+        emocionRepository.save(emocion);
+        return emocion;
     }
 
     @Override
@@ -43,12 +49,7 @@ public class EmocionService implements IEmocionService {
         return emocionElegida;
     }
 
-    @Override
-    public Emocion elegirEmocion(Long id) {
-        if (!emocionRepository.findById(id).isPresent()) {
-            throw new ValidacionDeIntegridad("El id de la emocion no fue encontrado");
-        }
-        Emocion emocion = emocionRepository.getReferenceById(id);
-        return emocion;
+    public List<Emocion> getEmocionesDelPaciente(Long pacienteId) {
+        return emocionRepository.findByPacienteId(pacienteId);
     }
 }
