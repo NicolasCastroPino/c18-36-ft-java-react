@@ -9,8 +9,6 @@ public record CrearEmocionDTO(
         @NotBlank
         String descripcion,
         @NotBlank
-        @Size(min = 1, max = 30)
-        String accion,
         @NotNull
         TipoEmocion tipoEmocion) {
 
