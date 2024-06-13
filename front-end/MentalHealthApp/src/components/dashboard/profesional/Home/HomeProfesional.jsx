@@ -1,6 +1,7 @@
 import { Header } from "../Header/Header";
 import { CardTurn } from "./CardTurn/CardTurn"
 import { CardPatient } from "./CardPatient/CardPatient";
+import Sidebar from "../Sidebar/Sidebar"
 
 import styles from "./HomeProfesional.module.css";
 
@@ -8,7 +9,7 @@ export const HomeProfesional = () => {
 
   return (
     <div className={styles.section}>
-
+      <Sidebar/>
       <Header />
 
       <section>

@@ -6,7 +6,7 @@ export const Context = createContext();
 export const CustomeProvider = ({children}) => {
 
   const [authState, setAuthState] = useState({
-    userId: null,
+    user: null,
     token: null,
     isAuthenticated: false,
   });
@@ -14,21 +14,21 @@ export const CustomeProvider = ({children}) => {
   // Recuperar el token y los datos del usuario del almacenamiento local cuando el componente se monta
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
-    const userId = JSON.parse(localStorage.getItem('user'));
-    if (token && userId) {
-      setAuthState({ userId, token, isAuthenticated: true });
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (token && user) {
+      setAuthState({ user, token, isAuthenticated: true });
     }
   }, []);
 
-  const login = (userId, token) => {
+  const login = (user, token) => {
     localStorage.setItem('jwtToken', token);
-    localStorage.setItem('userId', JSON.stringify(userId));
-    setAuthState({ userId, token, isAuthenticated: true });
+    localStorage.setItem('user', JSON.stringify(user));
+    setAuthState({ user, token, isAuthenticated: true });
   };
 
   const logout = () => {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     setAuthState({ user: null, token: null, isAuthenticated: false });
   };
 

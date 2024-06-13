@@ -32,3 +32,8 @@
   border-radius: 20px;
   padding: 5px 10px;
 }
+
+.profile_container .description {
+  padding: 5px 10px;
+  margin: 0 10px;
+}

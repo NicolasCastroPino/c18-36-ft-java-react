@@ -1,7 +1,7 @@
 import { Home } from "./components/Home"
 import { Login } from "./components/login/Login"
 import { CreateUser } from "./components/createuser/CreateUser"
-import { HomePaciente } from "./components/dashboard/paciente/HomePaciente";
+import HomePaciente from "./components/dashboard/paciente/HomePaciente";
 import { HomeProfesional } from "./components/dashboard/profesional/Home/HomeProfesional";
 import { AgendaProfessional } from "./components/dashboard/profesional/Agenda/Agenda";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
