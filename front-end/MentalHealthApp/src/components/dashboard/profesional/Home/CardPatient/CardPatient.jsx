@@ -5,7 +5,6 @@ import styles from "./CardPatient.module.css"
 
 export const CardPatient = () => {
 
-  const { patient } = useContext(Context)
 
   return (
     <div className={styles.card}>
@@ -18,7 +17,7 @@ export const CardPatient = () => {
 
       <div className={styles.information_container}>
         <h1>
-          {patient.nombre} {patient.apellido}
+          Pepe
         </h1>
 
         <div className={styles.information}>
@@ -28,7 +27,7 @@ export const CardPatient = () => {
               Email:
             </span>
             <p>
-              {patient.email}
+              Emal
             </p>
           </div>
 
@@ -37,7 +36,7 @@ export const CardPatient = () => {
               DNI:
             </span>
             <p>
-              {patient.documento}
+              DNI
             </p>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { Login } from "./components/login/Login"
 import { CreateUser } from "./components/createuser/CreateUser"
 import { HomePaciente } from "./components/dashboard/paciente/HomePaciente";
 import { HomeProfesional } from "./components/dashboard/profesional/Home/HomeProfesional";
+import { AgendaProfessional } from "./components/dashboard/profesional/Agenda/Agenda";
 
 import { CustomeProvider } from "../Context";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -16,8 +17,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<CreateUser />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard/profesional" element={<HomeProfesional />} />
+          <Route path="/dashboard/profesional/home" element={<HomeProfesional />} />
           <Route path="/dashboard/paciente" element={<HomePaciente />} />
+          <Route path="/dashboard/profesional/agenda" element={<AgendaProfessional />} />
         </Routes>
       </CustomeProvider>
     </BrowserRouter>

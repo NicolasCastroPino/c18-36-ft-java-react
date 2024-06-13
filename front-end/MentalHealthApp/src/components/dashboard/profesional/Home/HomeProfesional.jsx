@@ -1,42 +1,15 @@
-import { useContext } from "react";
-
-import { Context } from "../../../../../Context";
-import styles from "./HomeProfesional.module.css";
+import { Header } from "../Header/Header";
+import { CardTurn } from "./CardTurn/CardTurn"
 import { CardPatient } from "./CardPatient/CardPatient";
 
-export const HomeProfesional = () => {
-  const { professional } = useContext(Context);
+import styles from "./HomeProfesional.module.css";
 
-  const valoration = Array.from({ length: professional.valoracion });
+export const HomeProfesional = () => {
 
   return (
     <div className={styles.section}>
-      <section className={styles.profile_container}>
-        {/* <img src={logo} alt="logo" /> */}
-        <h1>
-          {professional.nombre} {professional.apellido}
-        </h1>
 
-        <div>
-          <h5>
-            Terapias:
-          </h5>
-          <span className={styles.major}>
-            {professional.especialidad}
-          </span>
-        </div>
-
-        <div>
-          <h5>
-            Valoracion:
-          </h5>
-          <span>
-            {valoration.map((_, index) => (
-              <span key={index}>⭐</span>
-            ))}
-          </span>
-        </div>
-      </section>
+      <Header />
 
       <section>
         <div className={styles.divider}>
@@ -45,6 +18,9 @@ export const HomeProfesional = () => {
         </div>
         <div className={styles.card_container}>
           <CardPatient />
+          <CardPatient />
+          <CardPatient />
+          <CardPatient />
         </div>
       </section>
 
@@ -52,6 +28,9 @@ export const HomeProfesional = () => {
         <div className={styles.divider}>
           <h1>Turnos</h1>
           <hr />
+        </div>
+        <div>
+          <CardTurn />
         </div>
       </section>
     </div>

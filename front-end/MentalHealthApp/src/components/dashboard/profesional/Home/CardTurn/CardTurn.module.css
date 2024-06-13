@@ -1,36 +1,41 @@
 .card{
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 30px;
-  background-color: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--gray);
+  gap: 10px;
+  background-color: var(--color2) ;
   border-radius: 20px;
-  width: 400px;
+  width: 300px;
   height: fit-content;
-  padding: 40px;
-  transition: all 0.3s ease-in-out;
-  &:hover{
-    box-shadow: 10px 5px 20px rgba(34, 34, 34, 0.2);
-    cursor: pointer;
-    scale: 1.025;
-  }
+  padding: 10px;
 }
 
-.information_container h1{
-  font-size: 40px;
-  font-weight: bold;
-  color: var(--color3);
+.button_container{
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  gap: 10px;
 }
 
-.button {
-  background-color: var(--color3);
-  width:120px;
+.button_transparent {
+  background-color: transparent;
+  width:40%;
   height: 35px;
   padding: 0 10px;
-  border: 1px solid var(--color2);
+  border: 1px solid var(--white);
   border-radius: 50px;
   color: #FAF7F5;
+}
+
+.button_white {
+  background-color: var(--white);
+  width:40%;
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid var(--white);
+  border-radius: 50px;
+  color: var(--black);
 }
 
 .information {
@@ -45,7 +50,7 @@
 .information div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 .information div span{

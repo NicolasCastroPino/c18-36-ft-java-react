@@ -1,43 +1,16 @@
-.section{
+.section {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 45px;
+  margin: 50px 0;
 }
 
-.profile_container{
-  display: flex;
-  flex-direction: column;
-}
-
-.profile_container h1{
-  color: var(--color2);
-  font-size: 64px;
-  font-weight: bold;
-}
-
-
-.profile_container h5{
-  width: 90px;
-  padding: 15px 0;
-  font-size: 16px;
-}
-
-.profile_container h5 span {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.profile_container .major {
-  background-color: var(--color2);
-  border-radius: 20px;
-  padding: 5px 10px;
-}
-
-.divider{
+.divider {
   display: flex;
   align-items: center;
   width: 100%;
   gap: 40px;
+  margin: 20px 0;
 }
 
 .divider h1 {
@@ -50,4 +23,18 @@
   border: none;
   border-top: 1px solid #000;
   margin: 0;
+}
+
+.card_container {
+  display: flex;
+  width: fit-content;
+  gap: 25px;
+  overflow-x: auto; 
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.card_container {
+  width: 920px; /* Ajustar según sea necesario */
 }
