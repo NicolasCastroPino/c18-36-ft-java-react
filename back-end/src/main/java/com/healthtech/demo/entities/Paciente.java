@@ -49,7 +49,7 @@ public class Paciente {
         this.email = paciente.email();
         this.telefono = paciente.telefono();
         this.documento = paciente.documento();
-        this.rol = "PACIENTE";
+        this.rol = "paciente";
         this.activo = true;
         this.usuario = new Usuario(paciente.usuario());
     }

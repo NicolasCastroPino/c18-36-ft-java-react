@@ -61,7 +61,7 @@ public class Psicologo {
         this.telefono = psicologo.telefono();
         this.documento = psicologo.documento();
         this.descripcion = psicologo.descripcion();
-        this.rol = "PSICOLOGO";
+        this.rol = "psicologo";
         this.activo = true;
         this.valoracion = ThreadLocalRandom.current().nextInt(3, 6);
         this.especialidad = psicologo.especialidad();
