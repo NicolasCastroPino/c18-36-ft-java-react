@@ -5,7 +5,8 @@ import HomePaciente from "./components/dashboard/paciente/HomePaciente";
 import { HomeProfesional } from "./components/dashboard/profesional/Home/HomeProfesional";
 import { AgendaProfessional } from "./components/dashboard/profesional/Agenda/Agenda";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { CustomeProvider } from "../Context";
+import { CustomeProvider } from "../Context";import Consulta from "./components/dashboard/paciente/consulta/Consulta"
+
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
           <Route path="/dashboard/profesional/home" element={<HomeProfesional />} />
           <Route path="/dashboard/paciente" element={<HomePaciente />} />
           <Route path="/dashboard/profesional/agenda" element={<AgendaProfessional />} />
-        </Routes>
+          <Route path="/dashboard/paciente/consulta" element={<Consulta />} />
+      </Routes>
       </CustomeProvider>
     </BrowserRouter>
   )

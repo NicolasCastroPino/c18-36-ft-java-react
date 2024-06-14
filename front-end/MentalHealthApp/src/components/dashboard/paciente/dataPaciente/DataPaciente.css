@@ -1,7 +1,7 @@
 .data-card{
     display: flex;
     flex-direction: row;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 300px;
    
@@ -9,7 +9,7 @@
 
 
 .pic-paciente {
-    margin-top: 30px;
+    margin-top: 10px;
     margin-right: 20px;
     align-self: center;
   }
