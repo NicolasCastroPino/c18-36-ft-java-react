@@ -15,7 +15,7 @@ const Sidebar = () => {
             <Link to="/dashboard/paciente">Home</Link>
           </li>
           <li>
-            <Link to="/dashboard/paciente">Agendar Consulta</Link>
+            <Link to="/dashboard/paciente/consulta">Agendar Consulta</Link>
           </li>
           <li>
             <Link to="/dashboard/paciente">Material de Apoyo</Link>

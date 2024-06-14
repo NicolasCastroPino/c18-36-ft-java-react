@@ -4,6 +4,7 @@ import { CreateUser } from "./components/createuser/CreateUser"
 import { HomeProfesional } from "./components/dashboard/profesional/HomeProfesional"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePaciente from "./components/dashboard/paciente/HomePaciente"
+import Consulta from "./components/dashboard/paciente/consulta/Consulta"
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard/profesional" element={<HomeProfesional />} />
        
         <Route path="/dashboard/paciente" element={<HomePaciente />} />
+        <Route path="/dashboard/paciente/consulta" element={<Consulta />} />
       </Routes>
     </BrowserRouter>
   )

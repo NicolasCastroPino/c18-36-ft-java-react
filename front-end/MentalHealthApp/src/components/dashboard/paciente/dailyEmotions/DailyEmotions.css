@@ -3,9 +3,8 @@
 .daily-container{
     display: flex;
     flex-direction: column;
-    margin-top: 70px;
     margin-left: 150px;
-    padding: 30px;
+    padding: 0 30px;
 }
 
 .daily-title-button{
@@ -25,6 +24,7 @@
 .emotions-part{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 .title-home{
     color: #2B463C;
