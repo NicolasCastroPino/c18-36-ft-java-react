@@ -5,6 +5,7 @@
 .section_container {
   display: flex;
   justify-content: space-between;
+  margin: 0 40px;
 }
 
 .article {

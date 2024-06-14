@@ -81,16 +81,13 @@ export const Login = () => {
 
       const token = data.jwTtoken;
       const decodedToken = jwtDecode(token);
-      const userId = decodedToken.id;
-
-      console.log('Decoded: ', decodedToken);
+      const userId = decodedToken.id; //ACA RECIBO EL ID DEL TOKEN PARA USARLO EN EL FETCH
+      const userRol = decodedToken.role; //ACA RECIBO EL ROL DEL TOKEN PARA USARLO EN EL FETCH
+      console.log(userRol)
 
       //ACA OBTENGO LOS DATOS DEL PACIENTE/PROFESIONAL
 
-      const URL_PATIENT = `https://c18-36-ft-java-react.onrender.com/paciente/seleccionar/${userId}`;
-      // const URL_PSYCHOLOGIST = `https://c18-36-ft-java-react.onrender.com/psicologo/seleccionar/${userId}`;
-
-      const psychologistResponse = await fetch(URL_PATIENT, {
+      const userResponse = await fetch(`https://c18-36-ft-java-react.onrender.com/${userRol}/seleccionar/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -98,32 +95,21 @@ export const Login = () => {
         }
       });
 
-      if (!psychologistResponse.ok) {
+      if (!userResponse.ok) {
         throw new Error('Failed to fetch user data')
       }
 
-      // const patientResponse = await fetch(URL_PATIENT, {
-      //   method: 'GET',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${token}`
-      //   }
-      // });
-
-      // if (!patientResponse.ok) {
-      //   throw new Error('Failed to fetch user data')
-      // }
-
-      const userData = await psychologistResponse.json();
-
-      console.log(userData);
+      const userData = await userResponse.json();
 
       login(userData, token);
-
-      if (userData.rol === "PSICOLOGO") {
+      
+      //ACA LO PATEO PARA LA RUTA DEPENDIENDO EL ROL DEL QUE SE INGRESE
+      if (userData.rol === "psicologo") {
         navigate("/dashboard/profesional/home");
-      } else{
+      } else if(userData.rol === "paciente"){
         navigate("/dashboard/paciente")
+      } else{
+        throw new Error('Failed to catch user rol')
       }
 
     } catch (error) {

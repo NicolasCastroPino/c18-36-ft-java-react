@@ -14,7 +14,6 @@ export const Header = () => {
 
   return (
     <section className={styles.profile_container}>
-      {/* <img src={logo} alt="logo" /> */}
       <h1>
         {user.nombre} {user.apellido}
       </h1>

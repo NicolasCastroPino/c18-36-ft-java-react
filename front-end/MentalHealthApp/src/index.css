@@ -22,7 +22,6 @@
 body {
   background-color: var(--main-bg-color);
   min-height: 100vh;
-  margin: 0 50px;
   display: flex;
   place-items: center;
   justify-content: center;

@@ -1,9 +1,13 @@
+import Sidebar from "../Sidebar/Sidebar"
 import styles from "./Agenda.module.css";
 
 export const AgendaProfessional = () => {
 
   return (
     <div className={styles.section}>
+
+      <Sidebar/>
+
       <section>
         <div className={styles.divider}>
           <h1>Agenda</h1>

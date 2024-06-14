@@ -1,8 +1,13 @@
-.section {
+.dashboard_container {
   display: flex;
-  flex-direction: column;
-  gap: 45px;
-  margin: 50px 0;
+  align-items: center;
+}
+
+.section {
+  flex: 1;
+  margin: 0 auto; 
+  padding-left: 150px; 
+  max-width: 1200px; 
 }
 
 .divider {
@@ -27,14 +32,13 @@
 
 .card_container {
   display: flex;
-  width: fit-content;
   gap: 25px;
-  overflow-x: auto; 
+  overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
   padding: 10px;
 }
 
 .card_container {
-  width: 920px; /* Ajustar según sea necesario */
+  width: 1000px;
 }

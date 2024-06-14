@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from './Logo.png'
 import styles from "./Sidebar.module.css"
-// import logo from "./Logo.svg"
 
 const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.logo}>
-        {/* <img src={logo} alt="VitalMind Logo" /> */}
+        <img src={logo} alt="VitalMind Logo" /> 
       </div>
       <nav className={styles.menu}>
         <ul>
@@ -23,7 +23,7 @@ const Sidebar = () => {
         </ul>
       </nav>
       <div className={styles.logout}>
-        <button className={styles.button_logout} onClick={() => { /* handle logout */ }}>Log out</button>
+        
       </div>
     </div>
   );
